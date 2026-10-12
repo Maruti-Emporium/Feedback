@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fabric & Style | Customer Reviews</title>
+<title>Maruti Emporium | Customer Details</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
@@ -138,9 +138,9 @@ main {
     padding: 9px 12px;
 }
 
-/* Review card */
+/* Form card */
 
-.review-card {
+.form-card {
     background: #fff;
     padding: 38px;
     border-radius: 20px;
@@ -176,8 +176,7 @@ main {
     margin-bottom: 9px;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group input {
     width: 100%;
     border: 1px solid #e5ddd5;
     border-radius: 9px;
@@ -189,52 +188,10 @@ main {
     transition: .25s;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-group input:focus {
     border-color: var(--maroon);
     box-shadow: 0 0 0 3px #762b3b12;
     background: #fff;
-}
-
-.form-group textarea {
-    min-height: 115px;
-    resize: vertical;
-}
-
-/* Interactive stars */
-
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.rating input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.rating label {
-    font-size: 35px;
-    line-height: 1;
-    color: #ded8d0;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.rating label:hover,
-.rating label:hover ~ label,
-.rating input:checked ~ label {
-    color: #d5a13e;
-    transform: scale(1.05);
-}
-
-.rating input:focus-visible + label {
-    outline: 2px solid var(--maroon);
-    outline-offset: 4px;
 }
 
 /* Submit button */
@@ -351,7 +308,7 @@ footer {
         font-size: 44px;
     }
 
-    .review-card {
+    .form-card {
         padding: 27px 22px;
     }
 
@@ -379,36 +336,35 @@ footer {
 <body>
 
 <header class="navbar">
-    <div class="logo">Fabric<span>&</span>Style.</div>
-    <div class="nav-tag">YOUR EXPERIENCE MATTERS</div>
+    <div class="logo">Maruti Emporium</div>
+    <div class="nav-tag">WE'RE HERE TO HELP</div>
 </header>
 
 <main>
 
     <section class="intro">
-        <div class="eyebrow">A little note from you</div>
+        <div class="eyebrow">Maruti Emporium</div>
 
         <h1>Every thread<br>
         tells a <em>story.</em></h1>
 
         <p>
-            Your style inspires us. Share your shopping experience
-            and help us bring more beautiful fabrics, timeless designs,
-            and thoughtful craftsmanship to you.
+            Please share your contact details and our team will be glad
+            to help you with your visit and shopping needs.
         </p>
 
         <div class="fabric-art"></div>
     </section>
 
-    <section class="review-card">
+    <section class="form-card">
 
         <div id="formContent">
             <div class="card-heading">
-                <h2>Write a Review</h2>
-                <p>We would love to hear what you think.</p>
+                <h2>Your Details</h2>
+                <p>Please enter your contact information.</p>
             </div>
 
-            <form id="reviewForm">
+            <form id="detailsForm">
 
                 <div class="form-group">
                     <label for="name">Your Name</label>
@@ -421,7 +377,7 @@ footer {
                     <label for="profession">Profession</label>
                     <input type="text" id="profession" name="profession"
                            placeholder="Enter your profession"
-                           autocomplete="organization-title" required>
+                              autocomplete="organization-title">
                 </div>
 
                 <div class="form-group">
@@ -434,50 +390,17 @@ footer {
                            autocomplete="tel-national" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="review">Your Review</label>
-                    <textarea id="review" name="review"
-                              placeholder="Tell us about your experience..."
-                              required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>How would you rate us?</label>
-
-                    <div class="rating">
-                        <input type="radio" id="star5"
-                               name="rating" value="5" required>
-                        <label for="star5" title="5 stars">★</label>
-
-                        <input type="radio" id="star4"
-                               name="rating" value="4">
-                        <label for="star4" title="4 stars">★</label>
-
-                        <input type="radio" id="star3"
-                               name="rating" value="3">
-                        <label for="star3" title="3 stars">★</label>
-
-                        <input type="radio" id="star2"
-                               name="rating" value="2">
-                        <label for="star2" title="2 stars">★</label>
-
-                        <input type="radio" id="star1"
-                               name="rating" value="1">
-                        <label for="star1" title="1 star">★</label>
-                    </div>
-                </div>
-
                 <button class="submit-btn" type="submit">
-                    Submit Your Review &rarr;
+                    Submit Details &rarr;
                 </button>
 
                 <p class="privacy">
-                    Thank you for supporting our craft.
+                    Thank you for visiting Maruti Emporium.
                 </p>
 
                 <p class="error-message" id="submissionError" role="alert"
                    aria-live="assertive">
-                    Something went wrong while submitting your feedback. Please try again.
+                    Something went wrong while submitting your details. Please try again.
                 </p>
             </form>
         </div>
@@ -487,10 +410,10 @@ footer {
             <div class="check">✓</div>
             <h3>Thank You!</h3>
             <p id="thankYouText">
-                Your feedback means a lot to us.
+                Your details have been submitted successfully.
             </p>
             <button type="button" id="writeAgain">
-                Write another review
+                Submit another response
             </button>
         </div>
 
@@ -499,11 +422,11 @@ footer {
 </main>
 
 <footer>
-    MADE WITH CARE · DESIGNED FOR YOUR STYLE
+    MARUTI EMPORIUM · THANK YOU FOR VISITING
 </footer>
 
 <script>
-const form = document.getElementById("reviewForm");
+const form = document.getElementById("detailsForm");
 const formContent = document.getElementById("formContent");
 const successMessage = document.getElementById("successMessage");
 const thankYouText = document.getElementById("thankYouText");
@@ -511,25 +434,15 @@ const submissionError = document.getElementById("submissionError");
 const submitButton = form.querySelector('button[type="submit"]');
 const scriptUrl = "https://script.google.com/macros/s/AKfycbyCbUZbLMF4b3J-11xiafoaTYnhThttHXVabOF8vWebw2yv8MntCnYeUVPyPZsovo7n/exec";
 
-
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
     const profession = document.getElementById("profession").value.trim();
     const contact = document.getElementById("contact").value.trim();
-    const review = document.getElementById("review").value.trim();
-    const rating = document.querySelector(
-        'input[name="rating"]:checked'
-    );
 
     if (!form.checkValidity()) {
         form.reportValidity();
-        return;
-    }
-
-    if (!rating) {
-        alert("Please select a star rating.");
         return;
     }
 
@@ -546,9 +459,7 @@ form.addEventListener("submit", async function(event) {
             body: new URLSearchParams({
                 name: name,
                 profession: profession,
-                contact: contact,
-                review: review,
-                rating: rating.value
+                contact: contact
             })
         });
         const result = await response.json();
@@ -558,8 +469,7 @@ form.addEventListener("submit", async function(event) {
         }
 
         thankYouText.textContent =
-            "Thank you, " + name + "! You rated us " +
-            rating.value + " out of 5 stars. We appreciate your feedback.";
+            "Thank you, " + name + "! Your details have been submitted successfully.";
 
         submitButton.disabled = false;
         formContent.style.display = "none";
