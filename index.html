@@ -242,6 +242,27 @@ main {
     transform: translateY(-2px);
 }
 
+.submit-btn:disabled {
+    opacity: .8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+.loading-spinner {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 9px;
+    border: 2px solid rgba(255, 255, 255, .45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    vertical-align: -3px;
+    animation: button-spin .7s linear infinite;
+}
+@keyframes button-spin {
+    to { transform: rotate(360deg); }
+}
+
 .privacy {
     text-align: center;
     color: #78877c;
@@ -421,7 +442,7 @@ footer {
                 </div>
 
                 <button class="submit-btn" type="submit">
-                    Submit Details &rarr;
+                    <span class="loading-spinner" id="submitSpinner" hidden></span><span id="submitButtonText">Submit Details &rarr;</span>
                 </button>
 
                 <p class="privacy">
@@ -462,6 +483,8 @@ const successMessage = document.getElementById("successMessage");
 const thankYouText = document.getElementById("thankYouText");
 const submissionError = document.getElementById("submissionError");
 const submitButton = form.querySelector('button[type="submit"]');
+const submitSpinner = document.getElementById("submitSpinner");
+const submitButtonText = document.getElementById("submitButtonText");
 const scriptUrl = "https://script.google.com/macros/s/AKfycbyCbUZbLMF4b3J-11xiafoaTYnhThttHXVabOF8vWebw2yv8MntCnYeUVPyPZsovo7n/exec";
 
 form.addEventListener("submit", async function(event) {
@@ -480,6 +503,8 @@ form.addEventListener("submit", async function(event) {
     if (submitButton.disabled) return;
 
     submitButton.disabled = true;
+    submitSpinner.hidden = false;
+    submitButtonText.textContent = "Submitting...";
     submissionError.style.display = "none";
 
     try {
@@ -504,12 +529,17 @@ form.addEventListener("submit", async function(event) {
         console.error("Submission error:", error);
         submissionError.style.display = "block";
         submitButton.disabled = false;
+        submitSpinner.hidden = true;
+        submitButtonText.textContent = "Submit Details →";
     }
 });
 
 document.getElementById("writeAgain").addEventListener("click", function() {
     form.reset();
     submissionError.style.display = "none";
+    submitButton.disabled = false;
+    submitSpinner.hidden = true;
+    submitButtonText.textContent = "Submit Details →";
     successMessage.style.display = "none";
     formContent.style.display = "block";
 });
