@@ -194,6 +194,30 @@ main {
     background: #fff;
 }
 
+.form-group textarea {
+    width: 100%;
+    min-height: 105px;
+    resize: vertical;
+    border: 1px solid #dce8de;
+    border-radius: 9px;
+    background: #fbfdfb;
+    padding: 14px 15px;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: .25s;
+}
+.form-group textarea:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px #246b4518;
+    background: #fff;
+}
+.optional-label {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 11px;
+}
+
 /* Submit button */
 
 .submit-btn {
@@ -390,6 +414,12 @@ footer {
                            autocomplete="tel-national" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="review">Review Us <span class="optional-label">(Optional)</span></label>
+                    <textarea id="review" name="review"
+                              placeholder="Share your experience with Maruti Emporium..."></textarea>
+                </div>
+
                 <button class="submit-btn" type="submit">
                     Submit Details &rarr;
                 </button>
@@ -440,41 +470,38 @@ form.addEventListener("submit", async function(event) {
     const name = document.getElementById("name").value.trim();
     const profession = document.getElementById("profession").value.trim();
     const contact = document.getElementById("contact").value.trim();
+    const review = document.getElementById("review").value.trim();
 
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
 
-    if (submitButton.disabled) {
-        return;
-    }
+    if (submitButton.disabled) return;
 
     submitButton.disabled = true;
     submissionError.style.display = "none";
 
     try {
-        const response = await fetch(scriptUrl, {
+        await fetch(scriptUrl, {
             method: "POST",
+            mode: "no-cors",
             body: new URLSearchParams({
                 name: name,
                 profession: profession,
-                contact: contact
+                contact: contact,
+                review: review
             })
         });
-        const result = await response.json();
 
-        if (!response.ok || !result.success) {
-            throw new Error("Feedback submission was not accepted.");
-        }
-
+        // no-cors hides the server response; verify the new row in Google Sheets.
         thankYouText.textContent =
-            "Thank you, " + name + "! Your details have been submitted successfully.";
+            "Thank you, " + name + "! Your details have been submitted. We appreciate your feedback.";
 
-        submitButton.disabled = false;
         formContent.style.display = "none";
         successMessage.style.display = "block";
     } catch (error) {
+        console.error("Submission error:", error);
         submissionError.style.display = "block";
         submitButton.disabled = false;
     }
